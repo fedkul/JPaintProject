@@ -1,31 +1,35 @@
 package controller;
 
-import model.ShapeType;
-import model.shapes.ShapeFactory;
-
-import java.awt.*;
+import model.shapes.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class mouseListener extends MouseAdapter{
-    private Graphics2D graphics = null;
-    ShapeFactory shapeFactory = new ShapeFactory();
+    private GraphicsObserver observer;
+    private Point origin = new Point(0,0);
+    private Point end = new Point(0,0);
 
 
     public mouseListener(){}
-    public mouseListener(Graphics2D graphics){
-        this.graphics=graphics;
+    public mouseListener(GraphicsObserver observer){
+        this.observer=observer;
     }
     @Override
     public void mousePressed(MouseEvent e){
-
+        origin.setX(e.getX());
+        origin.setY(e.getY());
     }
     @Override
     public void mouseDragged(MouseEvent e) {
+        //not occurring
+        end.setX(e.getX());
+        end.setY(e.getY());
 
     }
     @Override
     public void mouseReleased(MouseEvent e){
-
+        end.setX(e.getX());
+        end.setY(e.getY());
+        observer.addShape(origin,end);
     }
 }

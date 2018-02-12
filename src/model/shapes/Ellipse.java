@@ -3,8 +3,8 @@ package model.shapes;
 import java.awt.*;
 
 public class Ellipse implements IShape {
-    private Point origin;
-    private Point end;
+    private Point origin  = new Point(0,0);
+    private Point end  = new Point(0,0);
 
     Ellipse(){}
 
@@ -17,7 +17,7 @@ public class Ellipse implements IShape {
 
     @Override
     public void draw(Graphics2D graphics){
-        graphics.drawRect(origin.getX(), origin.getY(),
+        graphics.drawOval(origin.getX(), origin.getY(),
                 end.getX()-origin.getX(),end.getY()-origin.getY());
         System.out.println("Ellipse");
     }

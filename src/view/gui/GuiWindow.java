@@ -29,8 +29,6 @@ public class GuiWindow extends JFrame implements IGuiWindow {
         JPanel window = createWindow();
         this.canvas = canvas;
         window.add(canvas, BorderLayout.CENTER);
-        Graphics2D graphics = canvas.getGraphics2D();
-        graphics.drawRect(1, 1, 10, 10 );
 		validate();
     }
 
@@ -45,7 +43,6 @@ public class GuiWindow extends JFrame implements IGuiWindow {
 	private JPanel createWindow() {
 		JPanel contentPane = createBackgroundPanel();
         JPanel buttonPanel = createMenu();
-        JPanel drawPanel = createDrawPanel();
         contentPane.add(buttonPanel, BorderLayout.NORTH);
         //contentPane.add(drawPanel,BorderLayout.CENTER);
         return contentPane;
@@ -95,13 +92,6 @@ public class GuiWindow extends JFrame implements IGuiWindow {
         contentPane.setLayout(new BorderLayout(0, 0));
         contentPane.setBackground(Color.WHITE);
         setContentPane(contentPane);
-        return contentPane;
-    }
-    private JPanel createDrawPanel(){
-        JPanel contentPane = new JPanel();
-        contentPane.setLayout(new BorderLayout());
-        contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
-        contentPane.setBackground(Color.CYAN);
         return contentPane;
     }
 }

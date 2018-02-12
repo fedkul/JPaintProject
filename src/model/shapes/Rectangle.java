@@ -3,8 +3,8 @@ package model.shapes;
 import java.awt.*;
 
 public class Rectangle implements IShape {
-    private Point origin;
-    private Point end;
+    private Point origin = new Point(0,0);
+    private Point end = new Point(0,0);
 
     Rectangle(){}
 

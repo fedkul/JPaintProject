@@ -4,8 +4,8 @@ import java.awt.*;
 import java.util.Random;
 
 public class Triangle implements IShape{
-    private Point origin;
-    private Point end;
+    private Point origin = new Point(0,0);
+    private Point end = new Point(0,0);
 
     Triangle(){}
 
