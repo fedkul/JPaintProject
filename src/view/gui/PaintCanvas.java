@@ -9,19 +9,14 @@ import javax.swing.JComponent;
 import java.awt.*;
 
 public class PaintCanvas extends JComponent implements IPaintCanvas {
-    private Graphics2D graphics = (Graphics2D)getGraphics();
-    private GraphicsObserver observer;
+    private Graphics2D graphics;
+
     public Graphics2D getGraphics2D() {
-        graphics = (Graphics2D)getGraphics() ;
-        observer.addGraphics(graphics);
-        this.addMouseListener(new mouseListener(observer));
+        graphics = (Graphics2D)getGraphics();
         return graphics;
 
     }
-    public void setupGraphicsObserver(ShapeCollection shapeList, ApplicationState state){
-        observer = new GraphicsObserver(shapeList, state);
+    public void addMouseListener(GraphicsObserver graphicsObserver){
+        this.addMouseListener(new mouseListener(graphicsObserver));
     }
-//    public GraphicsObserver getGraphicsObserver(){
-//        return observer;
-//    }
 }

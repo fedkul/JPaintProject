@@ -44,7 +44,6 @@ public class GuiWindow extends JFrame implements IGuiWindow {
 		JPanel contentPane = createBackgroundPanel();
         JPanel buttonPanel = createMenu();
         contentPane.add(buttonPanel, BorderLayout.NORTH);
-        //contentPane.add(drawPanel,BorderLayout.CENTER);
         return contentPane;
 	}
 

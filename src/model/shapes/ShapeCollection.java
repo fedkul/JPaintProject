@@ -5,9 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class ShapeCollection {
-    private List<IShape> shapeList = new LinkedList<>();
-
-    public ShapeCollection(){}
+    private List<IShape> shapeList;
 
     public ShapeCollection(List<IShape> shapeList){
         this.shapeList=shapeList;

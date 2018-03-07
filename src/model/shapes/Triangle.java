@@ -1,30 +1,75 @@
 package model.shapes;
 
+import model.ShapeColor;
+import model.ShapeShadingType;
+
 import java.awt.*;
+import java.lang.reflect.Field;
 import java.util.Random;
 
 public class Triangle implements IShape{
-    private Point origin = new Point(0,0);
-    private Point end = new Point(0,0);
+    private Point origin;
+    private Point end;
+    private ShapeColor pColor;
+    private ShapeColor sColor;
+    private ShapeShadingType shading;
 
-    Triangle(){}
-
-    Triangle(int x1, int y1, int x2, int y2){
-        origin.setX(x1);
-        origin.setY(y1);
-        end.setX(x2);
-        end.setY(y2);
+    Triangle(Point origin, Point end, ShapeColor pColor, ShapeColor sColor, ShapeShadingType shading){
+        this.origin = origin; this.end = end;
+        this.pColor = pColor; this.sColor = sColor;
+        this.shading = shading;
     }
 
     @Override
     public void draw(Graphics2D graphics){
-        Random rand = new Random();
-        int int1 = rand.nextInt(100);
-        int int2 = rand.nextInt(100);
-        int int3 = rand.nextInt(100);
+        if (shading.equals(ShapeShadingType.FILLED_IN)
+                || shading.equals(ShapeShadingType.OUTLINE_AND_FILLED_IN)) {fill(graphics);}
+        if (shading.equals(ShapeShadingType.OUTLINE)
+                || shading.equals(ShapeShadingType.OUTLINE_AND_FILLED_IN)) {border(graphics);}
+    }
 
-        graphics.drawPolygon( new int[] {int1,int2,int3}, new int[] {int1+10,int2+10,int3+10}, 3);
-        System.out.println("Triangle");
+    @Override
+    public void border(Graphics2D graphics) {
+        Color color;
+        try{
+            Field field = Color.class.getField(pColor.toString());
+            color = (Color)field.get(null);
+        }catch(Exception e) {
+            color = null; // Not defined
+        }
+        graphics.setColor(color);
+        int x1,x2,x3;
+        int y1,y2;
+        x1=origin.getX();
+        x3=end.getX();
+        x2=(x3-((x3-x1)/2));
+
+        y1=end.getY();
+        y2=origin.getY();
+
+        graphics.drawPolygon( new int[] {x1,x2,x3}, new int[] {y1,y2,y1}, 3);
+    }
+
+    @Override
+    public void fill(Graphics2D graphics) {
+        Color color;
+        try{
+            Field field = Color.class.getField(sColor.toString());
+            color = (Color)field.get(null);
+        }catch(Exception e) {
+            color = null; // Not defined
+        }
+        graphics.setColor(color);
+        int x1,x2,x3;
+        int y1,y2;
+        x1=origin.getX();
+        x3=end.getX();
+        x2=(x3-((x3-x1)/2));
+
+        y1=end.getY();
+        y2=origin.getY();
+
+        graphics.fillPolygon( new int[] {x1,x2,x3}, new int[] {y1,y2,y1}, 3);
     }
 
     @Override

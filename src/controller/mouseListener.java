@@ -10,7 +10,6 @@ public class mouseListener extends MouseAdapter{
     private Point end = new Point(0,0);
 
 
-    public mouseListener(){}
     public mouseListener(GraphicsObserver observer){
         this.observer=observer;
     }
@@ -21,15 +20,25 @@ public class mouseListener extends MouseAdapter{
     }
     @Override
     public void mouseDragged(MouseEvent e) {
-        //not occurring
-        end.setX(e.getX());
-        end.setY(e.getY());
 
     }
     @Override
     public void mouseReleased(MouseEvent e){
         end.setX(e.getX());
         end.setY(e.getY());
+        rearrangePoints();
         observer.addShape(origin,end);
+    }
+    //set origin to upper left and end to lower right
+    private void rearrangePoints(){
+        int x1=origin.getX(),y1=origin.getY(),x2=end.getX(),y2=end.getY();
+        if(x1>x2) {
+            origin.setX(x2);
+            end.setX(x1);
+        }
+        if(y1>y2){
+            origin.setY(y2);
+            end.setY(y1);
+        }
     }
 }

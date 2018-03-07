@@ -28,31 +28,31 @@ public class ApplicationState implements IApplicationState {
     @Override
     public void setActiveShape() {
         activeShapeType = uiModule.getDialogResponse(dialogProvider.getChooseShapeDialog());
-        System.out.println("Set active shape to"+ activeShapeType);
+        System.out.println("Set active shape to "+ activeShapeType);
     }
 
     @Override
     public void setActivePrimaryColor() {
         activePrimaryColor = uiModule.getDialogResponse(dialogProvider.getChoosePrimaryColorDialog());
-        System.out.println("Set active primary color to"+ activePrimaryColor);
+        System.out.println("Set active primary color to "+ activePrimaryColor);
     }
 
     @Override
     public void setActiveSecondaryColor() {
         activeSecondaryColor = uiModule.getDialogResponse(dialogProvider.getChooseSecondaryColorDialog());
-        System.out.println("Set active secondary color to"+ activeSecondaryColor);
+        System.out.println("Set active secondary color to "+ activeSecondaryColor);
     }
 
     @Override
     public void setActiveShadingType() {
         activeShapeShadingType = uiModule.getDialogResponse(dialogProvider.getChooseShadingTypeDialog());
-        System.out.println("Set active shading type to"+ activeShapeShadingType);
+        System.out.println("Set active shading type to "+ activeShapeShadingType);
     }
 
     @Override
     public void setActiveStartAndEndPointMode() {
         activeStartAndEndPointMode = uiModule.getDialogResponse(dialogProvider.getChooseStartAndEndPointModeDialog());
-        System.out.println("Set active start and end point to"+ activeStartAndEndPointMode);
+        System.out.println("Set active start and end point to "+ activeStartAndEndPointMode);
     }
 
     @Override

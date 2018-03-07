@@ -1,5 +1,7 @@
 package main;
 
+import controller.GraphicsObserver;
+import controller.GraphicsObserverBuilder;
 import controller.IJPaintController;
 import controller.JPaintController;
 import model.shapes.IShape;
@@ -15,31 +17,21 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args){
+        GraphicsObserverBuilder gOBuilder = new GraphicsObserverBuilder();
         ShapeCollection shapeList = new ShapeCollection(new LinkedList<>());
+        gOBuilder.addShapeCollection(shapeList);
 
         PaintCanvas paintCanvas = new PaintCanvas();
         IGuiWindow guiWindow = new GuiWindow(paintCanvas);
         IUiModule uiModule = new Gui(guiWindow);
         ApplicationState appState = new ApplicationState(uiModule);
+        gOBuilder.addApplicationState(appState);
         IJPaintController controller = new JPaintController(uiModule, appState);
         controller.setup();
 
-        paintCanvas.setupGraphicsObserver(shapeList, appState);
-        paintCanvas.getGraphics2D();
 
-        /*ShapeFactory shapeFactory = new ShapeFactory();
-        IShape testShape1 = shapeFactory.getShape(ShapeType.ELLIPSE);
-        IShape testShape2 = shapeFactory.getShape(ShapeType.RECTANGLE);
-        IShape testShape3 = shapeFactory.getShape(ShapeType.TRIANGLE);
-
-        shapeList.add(testShape1);
-        shapeList.add(testShape2);
-        shapeList.add(testShape3);
-
-        for (IShape shape : shapeList) {shape.draw(graphics);}
-
-        shapeList.remove(0);
-
-        for (IShape shape : shapeList) {shape.draw(graphics);}*/
+        gOBuilder.addGraphics2D(paintCanvas.getGraphics2D());
+        GraphicsObserver gObserver = gOBuilder.makeGraphicsObserver();
+        paintCanvas.addMouseListener(gObserver);
     }
 }
