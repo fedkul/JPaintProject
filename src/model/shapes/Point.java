@@ -7,6 +7,10 @@ public class Point {
         this.x = x;
         this.y = y;
     }
+    public Point(Point p){
+        x = p.getX();
+        y = p.getY();
+    }
     public int getX(){
         return x;
     }

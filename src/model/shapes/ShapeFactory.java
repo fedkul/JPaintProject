@@ -7,7 +7,7 @@ import model.ShapeType;
 public class ShapeFactory {
 
     //use getShape to get the object
-    public IShape getShape(ShapeType shapeType, Point origin, Point end, ShapeColor pColor, ShapeColor sColor, ShapeShadingType shading){
+    public static IShape getShape(ShapeType shapeType, Point origin, Point end, ShapeColor pColor, ShapeColor sColor, ShapeShadingType shading){
         IShape shape = null;
         switch (shapeType){
             case ELLIPSE:

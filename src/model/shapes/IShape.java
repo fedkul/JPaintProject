@@ -1,5 +1,9 @@
 package model.shapes;
 
+import model.ShapeColor;
+import model.ShapeShadingType;
+import model.ShapeType;
+
 import java.awt.*;
 
 public interface IShape{
@@ -13,6 +17,8 @@ public interface IShape{
     void setEnd(int x, int y);
     Point getOrigin();
     Point getEnd();
-
-
+    ShapeType getType();
+    ShapeColor getPColor();
+    ShapeColor getSColor();
+    ShapeShadingType getShading();
 }

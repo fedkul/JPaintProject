@@ -24,8 +24,11 @@ public class JPaintController implements IJPaintController {
         uiModule.addEvent(EventName.CHOOSE_SECONDARY_COLOR, () -> applicationState.setActiveSecondaryColor());
         uiModule.addEvent(EventName.CHOOSE_SHADING_TYPE, () -> applicationState.setActiveShadingType());
         uiModule.addEvent(EventName.CHOOSE_START_POINT_ENDPOINT_MODE, () -> applicationState.setActiveStartAndEndPointMode());
-    }
-    private void setupDrawSpace(){
 
+        uiModule.addEvent(EventName.COPY, () -> applicationState.commandEvent(EventName.COPY));
+        uiModule.addEvent(EventName.PASTE, () -> applicationState.commandEvent(EventName.PASTE));
+        uiModule.addEvent(EventName.UNDO, () -> applicationState.commandEvent(EventName.UNDO));
+        uiModule.addEvent(EventName.REDO, () -> applicationState.commandEvent(EventName.REDO));
+        uiModule.addEvent(EventName.DELETE, () -> applicationState.commandEvent(EventName.DELETE));
     }
 }

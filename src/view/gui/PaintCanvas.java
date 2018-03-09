@@ -2,8 +2,6 @@ package view.gui;
 
 import controller.GraphicsObserver;
 import controller.mouseListener;
-import model.persistence.ApplicationState;
-import model.shapes.ShapeCollection;
 import view.interfaces.IPaintCanvas;
 import javax.swing.JComponent;
 import java.awt.*;

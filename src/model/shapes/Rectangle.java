@@ -2,19 +2,22 @@ package model.shapes;
 
 import model.ShapeColor;
 import model.ShapeShadingType;
+import model.ShapeType;
 
 import java.awt.*;
 import java.lang.reflect.Field;
 
 public class Rectangle implements IShape {
-    private Point origin;
-    private Point end;
-    private ShapeColor pColor;
-    private ShapeColor sColor;
-    private ShapeShadingType shading;
+    private final Point origin;
+    private final Point end;
+    private final ShapeColor pColor;
+    private final ShapeColor sColor;
+    private final ShapeShadingType shading;
+    private final ShapeType type = ShapeType.RECTANGLE;
 
     Rectangle(Point origin, Point end, ShapeColor pColor, ShapeColor sColor, ShapeShadingType shading){
-        this.origin = origin; this.end = end;
+        this.origin = new Point(origin); this.end = new Point(end);
+        rearrangePoints();
         this.pColor = pColor; this.sColor = sColor;
         this.shading = shading;
     }
@@ -30,8 +33,11 @@ public class Rectangle implements IShape {
     @Override
     public void border(Graphics2D graphics) {
         Color color;
+        String pOrS;
+        if(shading.equals(ShapeShadingType.OUTLINE_AND_FILLED_IN)) pOrS = sColor.toString();
+        else pOrS = pColor.toString();
         try{
-            Field field = Color.class.getField(pColor.toString());
+            Field field = Color.class.getField(pOrS);
             color = (Color)field.get(null);
         }catch(Exception e) {
             color = null; // Not defined
@@ -73,13 +79,36 @@ public class Rectangle implements IShape {
         end.setY(y);
     }
 
+    //get access to fields for recreation
     @Override
     public Point getOrigin() {
         return origin;
     }
-
     @Override
     public Point getEnd() {
         return end;
+    }
+    @Override
+    public ShapeType getType() {
+        return type;
+    }
+    @Override
+    public ShapeColor getPColor() {return pColor;}
+    @Override
+    public ShapeColor getSColor() {return sColor;}
+    @Override
+    public ShapeShadingType getShading() {return shading;}
+
+    //set origin to upper left and end to lower right
+    private void rearrangePoints(){
+        int x1=origin.getX(),y1=origin.getY(),x2=end.getX(),y2=end.getY();
+        if(x1>x2) {
+            origin.setX(x2);
+            end.setX(x1);
+        }
+        if(y1>y2){
+            origin.setY(y2);
+            end.setY(y1);
+        }
     }
 }
